@@ -75,6 +75,34 @@ docker start mycentos
 これで起動していることが分かる。  
 ![image](./image/4.png)  
 
+## docker exec
+
+bashを使うことで、コマンドライン経由でコンテナに入ることができる。  
+
+docker execは起動中のコンテナに入らずにコマンドを実行できる。  
+-it オプションで中に入ることができる。  
+```
+docker exec コンテナ指定 コマンド
+```
+
+下画面は、centosのバージョンを確認するcatコマンドを  
+コンテナの中と外から実行した結果である。  
+![image](./image/5.png)  
+
+## docker rm  
+
+停止中のコンテナを削除するコマンド  
+-fオプションで起動中でも強制削除できる。  
+※コンテナ内のデータも消えるので注意  
+```
+docker rm コンテナ指定
+```
+![image](./image/6.png)  
+
+
+## docker image  
+
+ローカルにあるimageをすべて表示  
 
 
 
