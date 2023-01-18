@@ -104,6 +104,21 @@ docker rm コンテナ指定
 
 ローカルにあるimageをすべて表示  
 
+```
+docker images
+```
+![image](./image/7.png)  
+
+
+## docker rmi  
+
+Dockerのイメージを削除  
+- 起動中のコンテナのイメージは削除できない  
+- Dockerイメージは依存関係があるため、ベースイメージは削除できない   
+
+```
+docker rmi イメージ指定
+```
 
 
 
