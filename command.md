@@ -194,7 +194,7 @@ docker commit mycentos rtanaka/rtanaka-centos:v1
 オリジナルイメージを自分のアカウントにアップする  
 
 ```
-docker push rtanaka/rtanaka-centos:v1
+docker push ryutanak/rtanaka-centos:v1
 ```
 ※「denied: requested access to the resource is denied」とでて、アップできない  
 
