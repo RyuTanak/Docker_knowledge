@@ -158,4 +158,50 @@ docker logs コンテナ指定
 ～～～～ここまでは必須コマンド～～～～  
 ～～～～ここからは必須ではないけどあれば便利コマンド～～～～  
 
-## 
+## docker inspect  
+
+Dockerの詳細情報を出力  
+```
+docker inspect コンテナ指定
+```
+![image](./image/11.png)  
+
+## docker pull  
+
+Dockerイメージのダウンロード  
+```
+docker pull イメージ名:タグ
+```
+![image](./image/12.png)  
+
+## docker commit  
+
+コンテナをイメージ化するコマンド  
+```
+docker commit コンテナ指定 DockerHubID/イメージ名:タグ
+```
+「DockerHubID/イメージ名:タグ」は、この後、pushコマンドでDockerHubにイメージを上げるために  
+必要である。  
+
+'''
+docker commit mycentos rtanaka/rtanaka-centos:v1
+'''
+![image](./image/13.png)  
+
+## docker push  
+
+イメージをDockerHubにアップする  
+オリジナルイメージを自分のアカウントにアップする  
+
+```
+docker push rtanaka/rtanaka-centos:v1
+```
+※「denied: requested access to the resource is denied」とでて、アップできない  
+
+
+## docker history  
+
+イメージの履歴を確認  
+```
+docker history イメージ指定
+```
