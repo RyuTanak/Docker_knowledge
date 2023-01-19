@@ -84,4 +84,52 @@ docker run -d -p 8081:80 --name dockerfile-run-nginx docker-run-nginx
 ![image](./image/18.png)  
 
 
-## 
+## COPYとADD  
+
+どちらもファイルをイメージに追加するコマンド  
+→ADDはネット経由でも追加できる  
+```
+COPY ホストのファイル コンテナのパス
+```
+
+使いどころ  
+- イメージにプログラムのソースコードを入れたい場合  
+- 設定ファイルをソフトの方に入れておいて、その設定ファイルが反映された状態でイメージを作りたいとき  
+
+今回は前者の使いどころで試す。  
+
+index.html  
+```
+<h1>Hello Dockerfile!</h1>
+```
+Dockerfile  
+```
+FROM ubuntu:20.04
+RUN apt-get update -y && \
+    apt-get install -y nginx
+COPY index.html /var/www/html
+CMD ["nginx", "-g", "deamon off;"]
+```
+
+以下のコマンドでイメージを作成  
+```
+docker build -t dockerfile-copy-nginx /workspaces/Docker_knowledge/copy/
+```
+![image](./image/19.png)  
+
+イメージからコンテナを作成  
+```
+docker run -d -p 8082:80 --name dockerfile-copy-nginx dockerfile-copy-nginx
+```
+コンテナが作成された。  
+![image](./image/20.png)  
+![image](./image/21.png)  
+
+
+## ENV  
+
+環境変数を設定するコマンド  
+```
+ENV DB_USER tanaka
+```
+
