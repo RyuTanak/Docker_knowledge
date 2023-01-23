@@ -50,6 +50,7 @@ https://github.com/docker-archive/toolbox/releases
 
 今回は、Filebeat、Elasticsearch、KibanaをDockerで連携しつつ動かしてみる。  
 
+[filebeatのダウンロード](https://github.com/RyuTanak/Docker_knowledge/blob/master/filebeat.md)  
 
 
 
