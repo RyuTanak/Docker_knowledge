@@ -46,3 +46,54 @@ service:
     image:mariadb: 10.4
     cintainer_name: "db2"
 ```
+
+## volume  
+
+コンテナとホストにディレクトリ共有  
+ホストのパス:コンテナのパス  
+(docker run -vと同じ)  
+```yaml
+version: "3"
+service:
+  web:
+  db:
+    volume:
+    ./data:/var/lib/mysql
+```
+
+## port  
+
+コンテナのポート開放とポートフォワーディング  
+(docker rn -pと同じ)  
+外部公開ポート：コンテナ内部ポート  
+```yaml
+version: "3"
+service:
+  web:
+    image:php:8.0
+    ports:
+      "8080:80"
+  db:
+```
+
+## コンテナ間通信の方法  
+
+サービス名がIPアドレスに変換される  
+
+## wordpressを立ち上げてみる  
+
+gitのファイルをコピーしたら、docker-composeの実行  
+```
+docker-compose up -d
+```
+
+## docker-composeコマンドの紹介  
+
+### docker-compose down  
+docker-compose.ymlで管理されているコンテナをストップ&削除  
+### restart  
+docker-compose.ymlで管理されている全てのコンテナを再起動  
+### ps  
+docker-compose.ymlで管理されているコンテナ一覧を表示  
+### run  
+docker-compose.ymlで管理されているサービスを一つ指定してコマンドを実行  

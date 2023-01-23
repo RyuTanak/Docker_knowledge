@@ -44,6 +44,12 @@ https://github.com/docker-archive/toolbox/releases
 [Dockerコンテナのストレージ](https://github.com/RyuTanak/Docker_knowledge/blob/master/storage_progrem.md)  
 [Dockerfile](https://github.com/RyuTanak/Docker_knowledge/blob/master/dockerfile.md)  
 
+[テキスト（github）](https://github.com/uchidayuma/udemy-docker)  
+
+## DockerでElastic Stackを動かしてみる  
+
+今回は、Filebeat、Elasticsearch、KibanaをDockerで連携しつつ動かしてみる。  
+
 
 
 
