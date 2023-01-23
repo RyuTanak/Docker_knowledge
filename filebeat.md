@@ -69,6 +69,10 @@ output.elasticsearch:
 予測だが、上記の「ELASTICSEARCH_HOSTS」などの大文字の変数は環境変数なのかなと思われる。  
 コンテナ起動時にこれらの環境変数を指定することで、接続先のElasticsearchを指定することができそう。  
 
+### filebeat.ymlをvolumeしてみる  
+### ログを置くところをvolumeする  
+### 動かしてみる  
+
 
 
 
