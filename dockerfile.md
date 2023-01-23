@@ -133,3 +133,57 @@ docker run -d -p 8082:80 --name dockerfile-copy-nginx dockerfile-copy-nginx
 ENV DB_USER tanaka
 ```
 
+Dockerfileの作成  
+```
+FROM ubuntu:20.04
+RUN apt-get update -y && \
+    apt-get install -y nginx
+ENV TESTENV="tanaka"
+# ENV APP_ENV="production"  複数設定可能
+CMD ["nginx", "-g", "daemon off;"] 
+```
+
+イメージ作成コマンド  
+```
+docker build -t dockerfile-env-nginx /workspaces/Docker_knowledge/env/
+```
+
+コンテナ作成コマンド  
+```
+docker run -d -p 8083:80 --name dockerfile-env-nginx dockerfile-env-nginx
+```
+
+環境変数の確認コマンド  
+```
+docker inspect dockerfile-env-nginx
+```
+コンテナの詳細を確認すると環境変数が設定されていることが分かる  
+![image](./image/22.png)  
+
+
+#　まとめ MariaDBを作ろう  
+
+Docerfileの用意  
+```
+FROM mariadb:10.4
+RUN apt-get update -y
+COPY my.conf /etc/mysql/conf.d
+COPY create-table.sql /docker-entrypoint-initdb.daemon
+ENV MYQSL_USER=root
+ENV MYQSL_DATABASE=docker
+ENV MYQSL_ROOT_PASSWORD=root
+```
+「FROM mariadb:10.4」公式のデータベースイメージを指定することによって、cmdを書く必要がない？  
+  →コマンドが用意されているため  
+「create-table.sql」テーブルを作るためのSQL。コンテナになった時にこのCreate tableが掛かれているSQLが実行される  
+「ENV MYQSL_DATABASE=docker」コンテナ作成時にdockerというデータベースが作られる  
+
+以下のGitから各設定ファイルを取得  
+https://github.com/uchidayuma/udemy-docker/tree/main/dockerfile/mariadb  
+
+イメージの作成  
+```
+docker build -t mymariadb /workspaces/Docker_knowledge/mariadb
+```
+
+
