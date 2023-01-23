@@ -169,9 +169,9 @@ FROM mariadb:10.4
 RUN apt-get update -y
 COPY my.conf /etc/mysql/conf.d
 COPY create-table.sql /docker-entrypoint-initdb.daemon
-ENV MYQSL_USER=root
-ENV MYQSL_DATABASE=docker
-ENV MYQSL_ROOT_PASSWORD=root
+ENV MARIADB_USER=root
+ENV MARIADB_DATABASE=docker
+ENV MARIADB_ROOT_PASSWORD=root
 ```
 「FROM mariadb:10.4」公式のデータベースイメージを指定することによって、cmdを書く必要がない？  
   →コマンドが用意されているため  
@@ -186,4 +186,14 @@ https://github.com/uchidayuma/udemy-docker/tree/main/dockerfile/mariadb
 docker build -t mymariadb /workspaces/Docker_knowledge/mariadb
 ```
 
+イメージからコンテナの作成  
+```
+docker run -d --name mymariadb mymariadb
+```
 
+ちゃんとできているか確認する。  
+コンテナの中に入る  
+```
+docker exec -it mymariadb /bin/bash
+```
+これでログインとかしてみて確認する。  
