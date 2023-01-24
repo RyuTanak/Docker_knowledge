@@ -23,7 +23,7 @@ docker pull docker.elastic.co/beats/filebeat:7.17.8
 
 コンテナを起動してみる  
 ```
-docker run --name filebeat -it imageID /bin/bash
+docker run imageID 
 ```
 これだと起動はするが、Filebeatの中に入っていけないため、以下を実行  
 ```
@@ -69,7 +69,14 @@ output.elasticsearch:
 予測だが、上記の「ELASTICSEARCH_HOSTS」などの大文字の変数は環境変数なのかなと思われる。  
 コンテナ起動時にこれらの環境変数を指定することで、接続先のElasticsearchを指定することができそう。  
 
+
 ### filebeat.ymlをvolumeしてみる  
+
+ローカルのfilebeatフォルダと、コンテナの/usr/share/filebeatファイルを共有する。  
+
+→マウントできない  
+![image](./image/27.png)  
+
 ### ログを置くところをvolumeする  
 ### 動かしてみる  
 
