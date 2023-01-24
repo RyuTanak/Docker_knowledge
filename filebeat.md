@@ -76,10 +76,52 @@ output.elasticsearch:
 
 →マウントできない  
 ![image](./image/27.png)  
+※結論として、/usr/share/filebeatフォルダはマウントできない。  
+  実行体ファイルがあるフォルダをホストのフォルダマウントすると、実行体がない状態になり、結果としてFilebeatが起動しなくなるため。  
 
-### ログを置くところをvolumeする  
-### 動かしてみる  
+filebeat.ymlはCOPYで送ることとする。  
+
+### Dockerfileで動かしてみる  
+
+以下のようにDockerfileを実装する。  
+```
+FROM docker.elastic.co/beats/filebeat:8.6.0
+COPY filebeat.yml /usr/share/filebeat/filebeat.yml
+```
+
+イメージ作成  
+```
+docker build -t 61d61be0214a /workspaces/Docker_knowledge/filebeat/
+```
+コンテナ作成  
+```
+docker run -d -v /workspaces/Docker_knowledge/filebeat/data:/usr/share/filebeat/data --name filebeat -it 922e3d4f15a0 /bin/bash
+```
+
+ここまでやったけど、、、結局Filebeatは思うように動かない。  
+(systemctlコマンドもないと言われ、起動しているのかどうかも確認できない...)  
 
 
+↓↓↓  
+実行コマンドを修正  
+Dockerfile  
+```
+FROM docker.elastic.co/beats/filebeat:7.17.8              # イメージ指定
+COPY filebeat.yml /usr/share/filebeat/filebeat.yml        # ホストのfilebeat.ymlをコンテナに上書き
+USER root                                                 # コマンド実行の前にroot権限に変更
+RUN chown root:filebeat /usr/share/filebeat/filebeat.yml  # 所有者をrootに、所有グループをfilebeatに変更
+RUN chmod go-w /usr/share/filebeat/filebeat.yml           # 「自分以外の人」が「書き込めない」ように設定（http://www.damp.tottori-u.ac.jp/~ooshida/unix/chmod.html）
+USER filebeat                                             # filebeat権限に戻る
+```
 
+イメージ作成  
+```
+docker build it filebeat_image ./filebeat
+```
+コンテナ作成  
+```
+docker run -d -v /workspaces/Docker_knowledge/filebeat/data:/usr/share/filebeat/data --name filebeat_container filebeat_image
+```
+
+一応これで動いているみたい  
 
