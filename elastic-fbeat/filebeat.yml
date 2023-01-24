@@ -1,0 +1,7 @@
+filebeat.inputs:
+- type: log
+  paths:
+    - /var/share/filebeat/data/*.log
+output.elasticsearch:
+  hosts: ["ELASTICSEARCH_HOSTS"]
+

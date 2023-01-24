@@ -34,5 +34,9 @@ Elasticsearchを1プロセスで立ち上げるか、複数で立ち上げるか
 elasticsearchとの依存性表す。  
 これがないとelasticsearchとkibanaが同時に立ち上がってしまう。  
 
+実行コマンドは「docker-compose up -d」  
+
+# filebeatも連携してみる  
+
 
 
